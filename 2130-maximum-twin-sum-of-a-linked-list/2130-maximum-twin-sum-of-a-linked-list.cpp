@@ -9,30 +9,48 @@
  * };
  */
 class Solution {
+private:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* prev = NULL;
+        ListNode* curr = head;
+        while(curr) {
+            ListNode* temp = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = temp;
+        }
+        return prev;
+    }
+
+    int lengthList(ListNode* head) {
+        int len = 0;
+        while(head) {
+            head = head->next;
+            len++;
+        }
+        return len;
+    }
+
 public:
     int pairSum(ListNode* head) {
-        ListNode* p1 = head;
-        int len = 0, maxLength = 0;
-        while(p1) {
-            len++;
-            p1 = p1->next;
+        ListNode* p = head;
+        int len = lengthList(p);
+        int midd = len / 2;
+        p = head;
+        int maxLength = 0;
+
+        for(int i=0; i<midd-1; i++) {
+            p = p->next;
         }
-        vector<int> v(len/2, 0);
-        int idx = 0;
-        p1 = head;
-        while(idx < len/2) {
-            v[idx] += p1->val;
-            p1 = p1->next;
-            idx++;
-        }
-        idx--;
-        while(idx >= 0) {
-            v[idx] += p1->val;
-            p1 = p1->next;
-            idx--;
-        }
-        for(int i=0; i<len/2; i++) {
-            maxLength = max(maxLength, v[i]);
+        ListNode* head2 = p->next;
+        p->next = NULL;
+
+        ListNode* head3 = reverseList(head2);
+        
+        for(int i=0; i<midd; i++) {
+            maxLength = max(maxLength, head->val+head3->val);
+            head = head->next;
+            head3 = head3->next;
         }
 
         return maxLength;
