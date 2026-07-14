@@ -24,10 +24,9 @@ private:
             q.pop();
 
             for(int i=0; i<4; i++) {
-                if(isValid(currX+dx[i], currY+dy[i], visited, maze)) {
-                    int newX = currX + dx[i];
-                    int newY = currY + dy[i];
-
+                int newX = currX + dx[i];
+                int newY = currY + dy[i];
+                if(isValid(newX, newY, visited, maze)) {
                     q.push({newX, newY});
                     visited[newX][newY] = true;
                     distance[newX][newY] = distance[currX][currY] + 1;
