@@ -1,9 +1,9 @@
 class Solution {
 private:
-    bool doOverlap(int lft, int rgt, int l, int r) {
-        if(l <= rgt) return true;
-        else return false;
+    bool doOverlap(int rgt, int l) {
+        return (l <= rgt);
     }
+
 public:
     int findMinArrowShots(vector<vector<int>>& points) {
         sort(points.begin(), points.end());
@@ -15,16 +15,14 @@ public:
             int l = points[i][0];
             int r = points[i][1];
 
-            if(doOverlap(lft, rgt, l, r)) {
-                cnt = cnt;
-                lft = max(lft, l);
+            if(doOverlap(rgt, l)) {
                 rgt = min(r, rgt);
             }
             else {
                 cnt += 1;
-                lft = l;
                 rgt = r;
             }
+            lft = l;
         }
         return cnt;
     }
