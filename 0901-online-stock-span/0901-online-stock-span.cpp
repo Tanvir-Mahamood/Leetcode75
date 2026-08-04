@@ -1,39 +1,28 @@
 class StockSpanner {
 private:
-    vector<int> mem;
-    vector<int> result;
-    stack<int> st;
-    int idx;
+    stack<pair<int, int>> st;
 public:
     StockSpanner() {
-        mem.clear();
-        result.clear();
-        stack<int>().swap(st);
-        idx = 0;
+        stack<pair<int,int>> empty;
+        st.swap(empty);
     }
     
     int next(int price) {
         int ans = 1;
         if(st.empty()) {
-            st.push(idx++);
-            mem.push_back(price);
-            result.push_back(ans);
+            st.push({price, ans});
             return ans;
         }
-        else if(price >= mem[st.top()]) {
-            while(!st.empty() && price >= mem[st.top()]) {
-                ans = ans + result[st.top()];
+        else if(price >= st.top().first) {
+            while(!st.empty() && price >= st.top().first) {
+                ans = ans + st.top().second;
                 st.pop();
             }
-            st.push(idx++);
-            mem.push_back(price);
-            result.push_back(ans);
+            st.push({price, ans});
             return ans;
         }
-        else if(price < mem[st.top()]) {
-            st.push(idx++);
-            mem.push_back(price);
-            result.push_back(ans);
+        else if(price < st.top().first) {
+            st.push({price, ans});
             return ans;
         }
         return -1;
