@@ -8,14 +8,9 @@ public:
     
     int next(int price) {
         int ans = 1;
-        
-        if(!st.empty() && price >= st.top().first) {
-            while(!st.empty() && price >= st.top().first) {
-                ans = ans + st.top().second;
-                st.pop();
-            }
-            st.push({price, ans});
-            return ans;
+        while(!st.empty() && price >= st.top().first) {
+            ans = ans + st.top().second;
+            st.pop();
         }
         st.push({price, ans});
         return ans;
