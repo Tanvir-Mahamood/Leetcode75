@@ -14,7 +14,9 @@ public:
         return solve(cost, n-1, dp);
     }
     */
+
     // Bottom Up Approach (Tabulation) (Time: O(n), Space: O(n))
+    /*
     int minCostClimbingStairs(vector<int>& cost) {
         cost.push_back(0);
         int n = cost.size();
@@ -25,5 +27,21 @@ public:
             dp[i] = min(dp[i-1], dp[i-2]) + cost[i];
         }
         return dp.back();
+    }
+
+    // Space Optimised Bottom Up Approach (Time: O(n), Space: O(1))
+    */
+    int minCostClimbingStairs(vector<int>& cost) {
+        cost.push_back(0);
+        int n = cost.size();
+        int a0 = cost[0];
+        int a1 = cost[1];
+        int sum = min(a0, a1);
+        for(int i=2; i<n; i++) {
+            sum = min(a0, a1) + cost[i];
+            a0 = a1;
+            a1 = sum;
+        }
+        return sum;
     }
 };
