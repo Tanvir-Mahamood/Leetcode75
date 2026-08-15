@@ -1,6 +1,7 @@
 class Solution {
 public:
     // Bottom Up (Tabulation) (Time: O(n), Space: O(n))
+    /*
     int tribonacci(int n) {
         if(n == 0) return 0;
         else if(n < 3) return 1;
@@ -12,6 +13,7 @@ public:
         }
         return dp[n];
     }
+    */
 
     // Space Optimised Bottom Up (Time: O(n), Space: O(1))
     /*
@@ -29,5 +31,19 @@ public:
     }
     */
 
-    
+    // Top Down Approach (Time: O(n), Space: O(n)))
+    int solve(vector<int> &dp, int n) {
+        if(n < 3) return dp[n];
+        if(dp[n] != -1) return dp[n];
+        return dp[n] = solve(dp, n-1) + solve(dp, n-2) + solve(dp, n-3);
+    }
+
+    int tribonacci(int n) {
+        if(n == 0) return 0;
+        else if(n < 3) return 1;
+
+        vector<int> dp(n+1, -1);
+        dp[0] = 0, dp[1] = 1, dp[2] = 1;
+        return solve(dp, n);
+    }
 };
