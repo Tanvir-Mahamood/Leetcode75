@@ -32,7 +32,7 @@ public:
     }
     */
 
-    // Top Down (Time: O(n), Space: O(1))
+    // Top Down (Memoization) (Time: O(n), Space: O(n))
     int solve(vector<int>& nums, int i, vector<int>& dp) {
         if(i == 1) return max(nums[0], nums[1]);
         if(i == 0) return nums[0]; 
