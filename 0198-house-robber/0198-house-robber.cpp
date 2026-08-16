@@ -37,7 +37,7 @@ public:
         if(i == 1) return max(nums[0], nums[1]);
         if(i == 0) return nums[0]; 
         if(dp[i] != -1) return dp[i];
-        return dp[i] = max(nums[i]+solve(nums, i-2, dp), solve(nums, i-1, dp));
+        return dp[i] = max(nums[i]+solve(nums, i-2, dp), solve(nums, i-1, dp)); // max(pick, not pick)
     }
     int rob(vector<int>& nums) {
         int n = nums.size();
