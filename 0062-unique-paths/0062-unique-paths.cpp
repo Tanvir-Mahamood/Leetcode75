@@ -30,11 +30,35 @@ public:
     */
 
     // Bottom Up (Space Optimized II) (Time: O(mn), Space: O(n))
+    /*
     int uniquePaths(int m, int n) {
         vector<int> dp(n, 1);
         for(int i=1; i<m; i++) {
             partial_sum(dp.begin(), dp.end(), dp.begin());
         }
         return dp.back();
+    }
+    */
+
+    // Bottom Up (Space Optimized III) (Time: O(min(m,n)), Space: O(1))
+    int nCr(int N, int k) {
+        int ans = 1;
+        for(int i=1; i<=k; i++) {
+            ans *= (N-k+i) / i;
+        }
+        return ans;
+    }
+
+    int uniquePaths(int m, int n) { 
+        long long ans = 1;
+
+        int k = min(m - 1, n - 1);
+        int total = m + n - 2;
+
+        for (int i = 1; i <= k; i++) {
+            ans = ans * (total - k + i) / i;
+        }
+
+        return ans;
     }
 };
