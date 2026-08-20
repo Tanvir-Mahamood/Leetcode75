@@ -16,6 +16,7 @@ public:
     */
 
     // Bottom Up (Space Optimized) (Time: O(mn), Space: O(n))
+    /*
     int uniquePaths(int m, int n) {
         vector<vector<int>> dp(2,vector<int>(n, 1));
         for(int i=1; i<m; i++) {
@@ -25,5 +26,15 @@ public:
             }
         }
         return dp[(m&1)^1][n-1];
+    }
+    */
+
+    // Bottom Up (Space Optimized II) (Time: O(mn), Space: O(n))
+    int uniquePaths(int m, int n) {
+        vector<int> dp(n, 1);
+        for(int i=1; i<m; i++) {
+            partial_sum(dp.begin(), dp.end(), dp.begin());
+        }
+        return dp.back();
     }
 };
