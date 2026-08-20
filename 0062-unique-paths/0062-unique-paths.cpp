@@ -42,23 +42,18 @@ public:
 
     // Bottom Up (Space Optimized III) (Time: O(min(m,n)), Space: O(1))
     int nCr(int N, int k) {
-        int ans = 1;
+        long long ans = 1;
         for(int i=1; i<=k; i++) {
-            ans *= (N-k+i) / i;
+            ans = ans *  (N-k+i) / i;
         }
         return ans;
     }
 
     int uniquePaths(int m, int n) { 
-        long long ans = 1;
-
         int k = min(m - 1, n - 1);
         int total = m + n - 2;
 
-        for (int i = 1; i <= k; i++) {
-            ans = ans * (total - k + i) / i;
-        }
 
-        return ans;
+        return nCr(total, k);
     }
 };
