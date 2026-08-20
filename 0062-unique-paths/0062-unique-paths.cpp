@@ -50,10 +50,8 @@ public:
     }
 
     int uniquePaths(int m, int n) { 
+        int N = m + n - 2;
         int k = min(m - 1, n - 1);
-        int total = m + n - 2;
-
-
-        return nCr(total, k);
+        return nCr(N, k);
     }
 };
