@@ -41,6 +41,7 @@ public:
     */
 
     // Bottom Up (Space Optimized III) (Time: O(min(m,n)), Space: O(1))
+    /*
     int nCr(int N, int k) {
         long long ans = 1;
         for(int i=1; i<=k; i++) {
@@ -53,5 +54,18 @@ public:
         int N = m + n - 2;
         int k = min(m - 1, n - 1);
         return nCr(N, k);
+    }
+    */
+
+    // Top Down (Memoization) (Time: O(mn), Space: O(mn))
+    int solve(int r, int c, vector<vector<int>> &dp) {
+        if(r == 0 || c == 0) return 1; 
+        if(dp[r][c] != -1) return dp[r][c];
+        return dp[r][c] = solve(r-1, c, dp) + solve(r, c-1, dp);
+    }
+
+    int uniquePaths(int m, int n) { 
+        vector<vector<int>> dp(m,vector<int>(n, -1));
+        return solve(m-1, n-1, dp);
     }
 };
